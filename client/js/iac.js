@@ -30,7 +30,6 @@
             addTxt('CJC - IAC connection success. Adding listener!', whatEntry);
 
             port.onmessage = function(evt) {
-              console.log('CJC - received:' + JSON.stringify(evt.data));
               addTxt('Received:' +
                   (evt.data ? JSON.stringify(evt.data) : 'No data'), whatEntry);
             };
@@ -41,7 +40,7 @@
             (i--) && (_port = port);
           });
         }, function onConnRejected(reason) {
-          console.log('CJC Cannot connect:' + reason);
+          addTxt('Cannot connect:' + reason, whatEntry);
         });
       }
     };

@@ -26,8 +26,8 @@
   ServerIAC.prototype = {
     onConnection: function(request) {
       if (request.keyword !== IAC_CON) {
-        console.log('This is not our connection request. keywork ' +
-                    request.keyword);
+        addTxt('This is not our connection request. keywork ' +
+                    request.keyword, whatEntry);
         return;
       }
       var port = this.port = request.port;
@@ -36,7 +36,6 @@
     },
     onmessage: function(evt) {
       var data = evt.data;
-      console.log ('CJC - server. Received:' + JSON.stringify(evt.data));
       addTxt('Received:' + JSON.stringify(evt.data), whatEntry);
       this.sendMsg(evt.data);
     },
@@ -45,7 +44,6 @@
         txt: 'Server test msg'
       };
 
-      console.log('CJC Sending msg:' + JSON.stringify(msg));
       addTxt('Sending msg:' + JSON.stringify(msg), whatEntry);
 
       this.port.postMessage(msg);
