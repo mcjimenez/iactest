@@ -20,9 +20,12 @@
   ServerIAC.prototype = {
     count: 0,
     onConnection: function(request) {
-      if (request.keywork !== 'testIAC') {
+ for (var kk in request) {
+ console.log("CJC" + kk + ":" + JSON.stringify(request[kk]));
+}
+      if (request.keywork !== 'testiac') {
         console.log('This is not our connection request. Keywork ' +
-                    request.keywork);
+                    request.keyword);
         return;
       }
       var port = this.port = request.port;

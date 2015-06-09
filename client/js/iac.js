@@ -1,6 +1,6 @@
 (function(imports) {
 'use strict';
-  var WHERE = 'testIAC';
+  var WHERE = 'testiac';
 
   var _eventsEntries = document.getElementById('eventsEntries');
   var _btoPing = document.getElementById('ping');
@@ -36,7 +36,7 @@
             addTxt('CJC - sending msg', whatEntry) &&
               port.postMessage(msg);
 
-            (i--) && ((_port = port) && console.log("CJC SALVAR PORT"));
+            (i--) && (_port = port);
           });
         }, function onConnRejected(reason) {
           console.log('CJC Cannot connect:' + reason);
