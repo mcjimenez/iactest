@@ -6,6 +6,7 @@
   var _eventsEntries = document.getElementById('eventsEntries');
 
   var whatEntry = _eventsEntries;
+  var IAC_CON = 'testiac';
 
   function addTxt(txt, where) {
     var li = document.createElement('li');
@@ -23,8 +24,9 @@
  for (var kk in request) {
  console.log("CJC" + kk + ":" + JSON.stringify(request[kk]));
 }
-      if (request.keywork !== 'testiac') {
-        console.log('This is not our connection request. Keywork ' +
+console.log('CJC comparar _' + request.keywork + '_ con _' + IAC_CON + '_');
+      if (request.keywork !== IAC_CON) {
+        console.log('This is not our connection request. keywork ' +
                     request.keyword);
         return;
       }
