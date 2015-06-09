@@ -4,13 +4,14 @@
   var origin = document.location.origin;
   var _btoInstallClt = document.getElementById('installClt');
   var _btoInstallSvr = document.getElementById('installSvr');
+  var I = 'iactest';
 
   console.log("CJC - origin:"+ origin);
 
   function install(what) {
     var origin = document.location.origin;
     // Could get this from the href but not really worth the hassle
-    var realPath = origin + '/' + what + '/manifest.webapp';
+    var realPath = origin + '/' + I + '/' + what + '/manifest.webapp';
     console.log('CJC - Installing:' + realPath);
     navigator.mozApps.install(realPath);
   }
