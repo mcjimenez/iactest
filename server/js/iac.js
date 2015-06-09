@@ -21,7 +21,7 @@
   ServerIAC.prototype = {
     count: 0,
     onConnection: function(request) {
-      if (request.keyword === IAC_CON) {
+      if (request.keyword !== IAC_CON) {
         console.log('This is not our connection request. keywork ' +
                     request.keyword);
         return;
