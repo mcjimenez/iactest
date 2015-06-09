@@ -34,7 +34,7 @@
               addTxt('Received:' +
                     evt.data ? JSON.stringify(evt.data) : 'No data', whatEntry);
             };
-            addTxt('CJC - sending msg', whatEntry);
+            addTxt('CJC - sending msg:' + JSON.stringify(msg), whatEntry);
             port.postMessage(msg);
 
             (i--) && (_port = port);
