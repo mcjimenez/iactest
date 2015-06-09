@@ -10,6 +10,10 @@
   var _count = 0;
   var _port = null;
 
+  var msg = {
+    txt: 'CLIENT MSG'
+  };
+
   function addTxt(txt, where) {
     var li = document.createElement('li');
     li.innerHTML = txt;
@@ -21,10 +25,6 @@
       var app = evt.target.result;
       if (app.connect) {
         app.connect(WHERE).then(function onConnAccepted(ports) {
-          var msg = {
-            txt: 'CJC test msg',
-            num: _count++
-          };
           var i = 1;
           ports.forEach(port => {
             addTxt('CJC - IAC connection success. Adding listener!', whatEntry);
@@ -34,6 +34,7 @@
               addTxt('Received:' +
                   (evt.data ? JSON.stringify(evt.data) : 'No data'), whatEntry);
             };
+            msg.num = _count++;
             addTxt('Sending:' + JSON.stringify(msg), whatEntry);
             port.postMessage(msg);
 
@@ -51,10 +52,7 @@
     connect();
 
     _btoPing.addEventListener('click', function send() {
-      var msg = {
-        txt: 'CJC test msg',
-        num: _count++
-      };
+      msg.num = _count++;
       addTxt('Sending:' + JSON.stringify(msg), whatEntry);
       _port.postMessage(msg);
     });

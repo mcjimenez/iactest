@@ -8,6 +8,11 @@
   var whatEntry = _eventsEntries;
   var IAC_CON = 'testiac';
 
+  var _count = 0;
+  var msg = {
+    txt: 'SERVER MSG'
+  };
+
   function addTxt(txt, where) {
     var li = document.createElement('li');
     li.innerHTML = txt;
@@ -19,7 +24,6 @@
   }
 
   ServerIAC.prototype = {
-    count: 0,
     onConnection: function(request) {
       if (request.keyword !== IAC_CON) {
         console.log('This is not our connection request. keywork ' +
@@ -38,7 +42,7 @@
     },
     sendMsg: function(aMsg) {
       var msg = aMsg || {
-        txt: 'Server sends msg ' + this.count++
+        txt: 'Server test msg'
       };
 
       console.log('CJC Sending msg:' + JSON.stringify(msg));
@@ -53,7 +57,8 @@
   window.addEventListener('load', function() {
 
     _sendMsgBto.addEventListener('click', function send() {
-      serverIAC.sendMsg();
+      msg.num = _count++;
+      serverIAC.sendMsg(msg);
     });
   });
 
