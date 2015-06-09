@@ -36,7 +36,7 @@
             addTxt('CJC - sending msg', whatEntry) &&
               port.postMessage(msg);
 
-            (i--) && _port = port;
+            (i--) && ((_port = port) && console.log("CJC SALVAR PORT"));
           });
         }, function onConnRejected(reason) {
           console.log('CJC Cannot connect:' + reason);
