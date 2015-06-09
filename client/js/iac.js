@@ -14,6 +14,7 @@
     var li = document.createElement('li');
     li.innerHTML = txt;
     where.appendChild(li);
+    return true;
   }
 
   function connect() {

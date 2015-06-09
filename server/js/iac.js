@@ -21,10 +21,6 @@
   ServerIAC.prototype = {
     count: 0,
     onConnection: function(request) {
- for (var kk in request) {
- console.log("CJC" + kk + ":" + JSON.stringify(request[kk]));
-}
-console.log('CJC comparar _' + request.keyword + '_ con _' + IAC_CON + '_');
       if (request.keyword !== IAC_CON) {
         console.log('This is not our connection request. keywork ' +
                     request.keyword);
