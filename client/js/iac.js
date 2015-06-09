@@ -14,7 +14,6 @@
     var li = document.createElement('li');
     li.innerHTML = txt;
     where.appendChild(li);
-    return true;
   }
 
   function connect() {
@@ -34,8 +33,8 @@
               console.log('CJC - received:' + JSON.stringify(evt.data));
               addTxt(evt.data ? JSON.stringify(evt.data):'No data', whatEntry);
             };
-            addTxt('CJC - sending msg', whatEntry) &&
-              port.postMessage(msg);
+            addTxt('CJC - sending msg', whatEntry);
+            port.postMessage(msg);
 
             (i--) && (_port = port);
           });
@@ -51,7 +50,8 @@
     connect();
 
     _btoPing.addEventListener('click', function send() {
-      addTxt('CJC - sending msg', whatEntry) && _port.postMessage({
+      addTxt('CJC - sending msg', whatEntry);
+      _port.postMessage({
         txt: 'CJC test msg',
         num: _count++
       });

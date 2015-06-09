@@ -33,11 +33,11 @@
     onmessage: function(evt) {
       var data = evt.data;
       console.log ('CJC - server. Received:' + JSON.stringify(evt.data));
-      addTxt('CJC  - server. Received:' + JSON.stringify(evt.data));
+      addTxt('CJC  - server. Received:' + JSON.stringify(evt.data), whatEntry);
     },
     sendMsg: function() {
       console.log('CJC - server sending a msg(' + this.count);
-      addTxt('CJC  - server. Received:' + JSON.stringify(evt.data));
+      addTxt('CJC - server sending a msg(' + this.count, whatEntry);
       var msg = {
         txt: 'Server sends msg ' + this.count++
       };
@@ -51,7 +51,8 @@
   window.addEventListener('load', function() {
 
     _sendMsgBto.addEventListener('click', function send() {
-      addTxt('CJC - sending msg', whatEntry) && serverIAC.sendMsg();
+      addTxt('CJC - sending msg', whatEntry);
+      serverIAC.sendMsg();
     });
   });
 
