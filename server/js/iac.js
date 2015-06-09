@@ -21,7 +21,7 @@
   ServerIAC.prototype = {
     count: 0,
     onConnection: function(request) {
-      if (request.keyword !== IAC_CON) {
+      if (request.keyword === IAC_CON) {
         console.log('This is not our connection request. keywork ' +
                     request.keyword);
         return;
@@ -34,11 +34,12 @@
       var data = evt.data;
       console.log ('CJC - server. Received:' + JSON.stringify(evt.data));
       addTxt('CJC  - server. Received:' + JSON.stringify(evt.data), whatEntry);
+      this.sendMsg(evt.data);
     },
-    sendMsg: function() {
-      console.log('CJC - server sending a msg(' + this.count);
-      addTxt('CJC - server sending a msg(' + this.count, whatEntry);
-      var msg = {
+    sendMsg: function(aMsg) {
+      console.log('CJC - server sending a msg n# ' + this.count);
+      addTxt('CJC - server sending a msg n# ' + this.count, whatEntry);
+      var msg = aMsg || {
         txt: 'Server sends msg ' + this.count++
       };
 
@@ -47,7 +48,7 @@
   };
 
   var serverIAC = new ServerIAC();
-//  exports.serverIAC = serverIAC;
+
   window.addEventListener('load', function() {
 
     _sendMsgBto.addEventListener('click', function send() {

@@ -31,7 +31,8 @@
 
             port.onmessage = function(evt) {
               console.log('CJC - received:' + JSON.stringify(evt.data));
-              addTxt(evt.data ? JSON.stringify(evt.data):'No data', whatEntry);
+              addTxt('Received:' +
+                    evt.data ? JSON.stringify(evt.data) : 'No data', whatEntry);
             };
             addTxt('CJC - sending msg', whatEntry);
             port.postMessage(msg);
