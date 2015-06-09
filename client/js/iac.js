@@ -32,9 +32,9 @@
             port.onmessage = function(evt) {
               console.log('CJC - received:' + JSON.stringify(evt.data));
               addTxt('Received:' +
-                    evt.data ? JSON.stringify(evt.data) : 'No data', whatEntry);
+                  (evt.data ? JSON.stringify(evt.data) : 'No data'), whatEntry);
             };
-            addTxt('CJC - sending msg:' + JSON.stringify(msg), whatEntry);
+            addTxt('Sending:' + JSON.stringify(msg), whatEntry);
             port.postMessage(msg);
 
             (i--) && (_port = port);
@@ -51,11 +51,12 @@
     connect();
 
     _btoPing.addEventListener('click', function send() {
-      addTxt('CJC - sending msg', whatEntry);
-      _port.postMessage({
+      var msg = {
         txt: 'CJC test msg',
         num: _count++
-      });
+      };
+      addTxt('Sending:' + JSON.stringify(msg), whatEntry);
+      _port.postMessage(msg);
     });
   });
 

@@ -33,15 +33,16 @@
     onmessage: function(evt) {
       var data = evt.data;
       console.log ('CJC - server. Received:' + JSON.stringify(evt.data));
-      addTxt('CJC  - server. Received:' + JSON.stringify(evt.data), whatEntry);
+      addTxt('Received:' + JSON.stringify(evt.data), whatEntry);
       this.sendMsg(evt.data);
     },
     sendMsg: function(aMsg) {
-      console.log('CJC - server sending a msg n# ' + this.count);
-      addTxt('CJC - server sending a msg n# ' + this.count, whatEntry);
       var msg = aMsg || {
         txt: 'Server sends msg ' + this.count++
       };
+
+      console.log('CJC Sending msg:' + JSON.stringify(msg));
+      addTxt('Sending msg:' + JSON.stringify(msg), whatEntry);
 
       this.port.postMessage(msg);
     }
@@ -52,7 +53,6 @@
   window.addEventListener('load', function() {
 
     _sendMsgBto.addEventListener('click', function send() {
-      addTxt('CJC - sending msg', whatEntry);
       serverIAC.sendMsg();
     });
   });
