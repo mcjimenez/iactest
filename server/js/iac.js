@@ -35,10 +35,10 @@
       port.start();
     },
     onmessage: function(evt) {
-for (var kk in evt) {
-console.log("CJC " + kk + ":" + JSON.stringify(evt[kk]));
-}
 console.log("CJC target:"+JSON.stringify(evt.target));
+for (var kk in evt.target) {
+console.log("CJC target["+kk+"]:"+JSON.stringify(evt.target[kk]));
+}
 console.log("CJC currentTarget:"+JSON.stringify(evt.currentTarget));
 console.log("CJC originalTarget:"+JSON.stringify(evt.originalTarget));
 
