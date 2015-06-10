@@ -38,6 +38,10 @@
 for (var kk in evt) {
 console.log("CJC " + kk + ":" + JSON.stringify(evt[kk]));
 }
+console.log("CJC target:"+JSON.stringify(evt.target));
+console.log("CJC currentTarget:"+JSON.stringify(evt.currentTarget));
+console.log("CJC originalTarget:"+JSON.stringify(evt.originalTarget));
+
       var data = evt.data;
       addTxt('Received:' + JSON.stringify(evt.data), whatEntry);
       //this.sendMsg(evt.data);
