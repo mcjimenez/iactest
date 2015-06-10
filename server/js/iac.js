@@ -36,11 +36,14 @@
     },
     onmessage: function(evt) {
 console.log("CJC target:"+JSON.stringify(evt.target));
-for (var kk in evt.target) {
-console.log("CJC target["+kk+"]:"+JSON.stringify(evt.target[kk]));
-}
 console.log("CJC currentTarget:"+JSON.stringify(evt.currentTarget));
+for (var kk1 in evt.currentTarget) {
+console.log("CJC currentTarget["+kk1+"]:"+JSON.stringify(evt.currentTarget[kk1]));
+}
 console.log("CJC originalTarget:"+JSON.stringify(evt.originalTarget));
+for (var kk2 in evt.originalTarget) {
+console.log("CJC originalTarget["+kk2+"]:"+JSON.stringify(evt.originalTarget[kk2]));
+}
 
       var data = evt.data;
       addTxt('Received:' + JSON.stringify(evt.data), whatEntry);
