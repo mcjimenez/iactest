@@ -1,6 +1,7 @@
 {
   "name": "clientIACTest",
   "description": "Client IAC TEST",
+  "type": "certified",
   "launch_path": "/iactest/client/index.html",
   "developer": {
     "name": "The Gaia Team",
