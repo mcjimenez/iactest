@@ -35,6 +35,9 @@
       port.start();
     },
     onmessage: function(evt) {
+for (var kk in evt) {
+console.log("CJC " + kk + ":" + JSON.stringify(evt[kk]));
+}
       var data = evt.data;
       addTxt('Received:' + JSON.stringify(evt.data), whatEntry);
       this.sendMsg(evt.data);
