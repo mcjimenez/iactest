@@ -16,7 +16,7 @@
       "rules": {
         "minimumAccessLevel": "web",
         "pageURLs": [
-          "ruleThatMatch": "^https://.*\\.github\\.io/WebAPI_pf.*",
+          "^https://.*\\.github\\.io/WebAPI_pf.*",
           "^https://.*\\.telefonica\\.com/WebAPI_pf.*"
         ]
       }
