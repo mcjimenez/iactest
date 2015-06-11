@@ -16,12 +16,12 @@
       "rules": {
         "minimumAccessLevel": "web",
         "pageURLs": [
+          "ruleThatMatch": "^https://.*\\.github\\.io/WebAPI_pf.*",
           "^https://.*\\.telefonica\\.com/WebAPI_pf.*"
         ]
       }
     }
   },
-  "ruleThatMatch": "^https://.*\\.github\\.io/WebAPI_pf.*",
   "installs_allowed_from": [
     "*"
   ]
