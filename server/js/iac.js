@@ -30,7 +30,7 @@
                     request.keyword, whatEntry);
         return;
       }
-      addTxt('Connection from ' + request.pageURL);
+      addTxt('Connection from ' + request.pageURL, whatEntry);
       var port = this.port = request.port;
       port.onmessage = this.onmessage.bind(this);
       port.start();
