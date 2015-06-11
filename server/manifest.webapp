@@ -13,9 +13,15 @@
   "connections": {
     "testiac": {
       "description": "IAC SERVER TEST",
-      "rules": {}
+      "rules": {
+        "minimumAccessLevel": "web",
+        "pageURLs": [
+          "^https://.*\\.telefonica\\.com/WebAPI_pf.*"
+        ]
+      },
     }
   },
+  "ruleThatMatch": "^https://.*\\.github\\.io/WebAPI_pf.*",
   "installs_allowed_from": [
     "*"
   ]

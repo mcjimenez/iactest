@@ -36,10 +36,6 @@
       port.start();
     },
     onmessage: function(evt) {
-for (var kk1 in evt) {
-console.log("CJC evt["+kk1+"]:"+JSON.stringify(evt[kk1]));
-}
-
       var data = evt.data;
       addTxt('Received:' + JSON.stringify(evt.data), whatEntry);
       //this.sendMsg(evt.data);
