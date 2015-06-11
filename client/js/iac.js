@@ -1,6 +1,12 @@
 (function(imports) {
 'use strict';
   var WHERE = 'testiac';
+  var RULES = {
+    "minimumAccessLevel": "web",
+    "pageURLs": [
+      "^https://.*\\.github\\.io/iactest.*"
+    ]
+  };
 
   var _eventsEntries = document.getElementById('eventsEntries');
   var _btoPing = document.getElementById('ping');
@@ -24,7 +30,7 @@
     navigator.mozApps.getSelf().onsuccess = function(evt) {
       var app = evt.target.result;
       if (app.connect) {
-        app.connect(WHERE).then(function onConnAccepted(ports) {
+        app.connect(WHERE, RULES).then(function onConnAccepted(ports) {
           var i = 1;
           ports.forEach(port => {
             addTxt('CJC - IAC connection success. Adding listener!', whatEntry);
