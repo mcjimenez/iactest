@@ -18,7 +18,7 @@
         "pageURLs": [
           "^https://.*\\.telefonica\\.com/WebAPI_pf.*"
         ]
-      },
+      }
     }
   },
   "ruleThatMatch": "^https://.*\\.github\\.io/WebAPI_pf.*",
