@@ -16,7 +16,7 @@
       "rules": {
         "minimumAccessLevel": "web",
         "pageURLs": [
-          "^https://.*\\.github\\.io/WebAPI_pf.*",
+          "^https://.*\\.github\\.io/iactest.*",
           "^https://.*\\.telefonica\\.com/WebAPI_pf.*"
         ]
       }
