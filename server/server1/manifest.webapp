@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "name": "svr1IACTest",
+  "description": "Svr 1 IAC Test",
+  "type": "certified",
+  "launch_path": "/iactest/server/server1/index.html",
+  "icons": {
+    "16": "/iactest/server/server1/style/icons/icon.png",
+    "48": "/iactest/server/server1/style/icons/icon.png",
+    "60": "/iactest/server/server1/style/icons/icon.png",
+    "128": "/iactest/server/server1/style/icons/icon.png"
+  },
+  "connections": {
+    "testiac": {
+      "description": "IAC SVR 1 TEST",
+      "rules": {
+        "minimumAccessLevel": "web",
+        "pageURLs": [
+          "^https://.*\\.github\\.io/iactest.*",
+          "^https://.*\\.telefonica\\.com/WebAPI_pf.*"
+        ]
+      }
+    }
+  },
+  "installs_allowed_from": [
+    "*"
+  ]
+}
+

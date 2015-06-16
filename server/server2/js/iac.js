@@ -10,7 +10,7 @@
 
   var _count = 0;
   var msg = {
-    txt: 'SERVER MSG'
+    txt: 'SERVER 2 MSG'
   };
 
   function addTxt(txt, where) {
@@ -26,26 +26,26 @@
   ServerIAC.prototype = {
     onConnection: function(request) {
       if (request.keyword !== IAC_CON) {
-        addTxt('This is not our connection request. keywork ' +
+        addTxt('SVR2. This is not our connection request. keywork ' +
                     request.keyword, whatEntry);
         return;
       }
-      addTxt('Connection from ' + request.pageURL, whatEntry);
+      addTxt('SVR2. Connection from ' + request.pageURL, whatEntry);
       var port = this.port = request.port;
       port.onmessage = this.onmessage.bind(this);
       port.start();
     },
     onmessage: function(evt) {
       var data = evt.data;
-      addTxt('Received:' + JSON.stringify(evt.data), whatEntry);
+      addTxt('SVR2. Received:' + JSON.stringify(evt.data), whatEntry);
       //this.sendMsg(evt.data);
     },
     sendMsg: function(aMsg) {
       var msg = aMsg || {
-        txt: 'Server test msg'
+        txt: 'SVR 2 test msg'
       };
 
-      addTxt('Sending msg:' + JSON.stringify(msg), whatEntry);
+      addTxt('SVR2. Sending msg:' + JSON.stringify(msg), whatEntry);
 
       this.port.postMessage(msg);
     }
