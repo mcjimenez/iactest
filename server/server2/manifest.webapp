@@ -11,7 +11,7 @@
     "128": "/iactest/server/server2/style/icons/icon.png"
   },
   "connections": {
-    "testiac": {
+    "iacsvr2": {
       "description": "IAC SVR 2 TEST",
       "rules": {
         "minimumAccessLevel": "web",
