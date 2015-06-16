@@ -13,9 +13,14 @@
     navigator.mozApps.install(realPath);
   }
 
+  function installSVR() {
+    install('server/server1');
+    install('server/server2');
+  }
+
   window.addEventListener('load', function() {
     _btoInstallClt.addEventListener('click', install.bind(null, 'client'));
-    _btoInstallSvr.addEventListener('click', install.bind(null, 'server'));
+    _btoInstallSvr.addEventListener('click', installSVR);
   });
 
 })(window);
