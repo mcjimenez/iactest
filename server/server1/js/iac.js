@@ -6,7 +6,7 @@
   var _eventsEntries = document.getElementById('eventsEntries');
 
   var whatEntry = _eventsEntries;
-  var IAC_CON = 'testiac';
+  var IAC_CON = 'iacsvr1';
 
   var _count = 0;
   var msg = {
