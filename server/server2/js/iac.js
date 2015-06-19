@@ -39,6 +39,7 @@
     onmessage: function(evt) {
       var data = evt.data;
       addTxt(IAC_CON + '. Received:' + JSON.stringify(evt.data), whatEntry);
+      evt.data.who = IAC_CON;
       this.sendMsg(evt.data);
     },
     sendMsg: function(aMsg) {
