@@ -10,7 +10,8 @@
 
   var _count = 0;
   var msg = {
-    txt: 'SERVER 2 MSG'
+    txt: 'SERVER 2 MSG',
+    who: IAC_CON
   };
 
   function addTxt(txt, where) {
@@ -26,26 +27,27 @@
   ServerIAC.prototype = {
     onConnection: function(request) {
       if (request.keyword !== IAC_CON) {
-        addTxt('SVR2. This is not our connection request. keywork ' +
-                    request.keyword, whatEntry);
+        addTxt(IAC_CON + '. This is not our connection request. keywork ' +
+               request.keyword, whatEntry);
         return;
       }
-      addTxt('SVR2. Connection from ' + request.pageURL, whatEntry);
+      addTxt(IAC_CON + '. Connection from ' + request.pageURL, whatEntry);
       var port = this.port = request.port;
       port.onmessage = this.onmessage.bind(this);
       port.start();
     },
     onmessage: function(evt) {
       var data = evt.data;
-      addTxt('SVR2. Received:' + JSON.stringify(evt.data), whatEntry);
+      addTxt(IAC_CON + '. Received:' + JSON.stringify(evt.data), whatEntry);
       this.sendMsg(evt.data);
     },
     sendMsg: function(aMsg) {
       var msg = aMsg || {
-        txt: 'SVR 2 test msg'
+        txt: IAC_CON + ' test msg',
+        who: IAC_CON
       };
 
-      addTxt('SVR2. Sending msg:' + JSON.stringify(msg), whatEntry);
+      addTxt(IAC_CON + '. Sending msg:' + JSON.stringify(msg), whatEntry);
 
       this.port.postMessage(msg);
     }
@@ -60,6 +62,5 @@
       serverIAC.sendMsg(msg);
     });
   });
-
 
 })(window);

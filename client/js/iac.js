@@ -52,11 +52,11 @@
 
           console.log('CJC where:' + where);
           if (where === WHERE_SVR1) {
-            console.log('CJC CONFIGURAR SVR1');
+            console.log('CJC CONFIGURAR SVR1 ' + i);
             (i--) && (_portSrv1 = port);
             msg.num = _countSvr1++;
           } else {
-            console.log('CJC CONFIGURAR SVR2');
+            console.log('CJC CONFIGURAR SVR2 ' + i);
             (i--) && (_portSrv2 = port);
             msg.num = _countSvr2++;
           }
