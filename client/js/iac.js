@@ -46,11 +46,25 @@
             addTxt('Received [' + where + ']:' +
                   (evt.data ? JSON.stringify(evt.data) : 'No data'), whatEntry);
           };
-          msg.num = (where === WHERE_SVR1 ? _countSvr1++ : _countSvr2++) ;
+          //msg.num = (where === WHERE_SVR1 ? _countSvr1++ : _countSvr2++) ;
+          //addTxt('Sending [' + where + ']:' + JSON.stringify(msg), whatEntry);
+          //port.postMessage(msg);
+
+          console.log('CJC where:' + where);
+          if (where === WHERE_SVR1) {
+            console.log('CJC CONFIGURAR SVR1');
+            (i--) && (_portSrv1 = port);
+            msg.num = _countSvr1++;
+          } else {
+            console.log('CJC CONFIGURAR SVR2');
+            (i--) && (_portSrv2 = port);
+            msg.num = _countSvr2++;
+          }
+
           addTxt('Sending [' + where + ']:' + JSON.stringify(msg), whatEntry);
           port.postMessage(msg);
 
-          (i--) && (where === WHERE_SVR1 ? _portSrv1 = port : _portSrv2 = port);
+          //(i--) && (where === WHERE_SVR1 ? _portSrv1 = port : _portSrv2 = port);
         });
       }, function onConnRejected(reason) {
         addTxt('Cannot connect:' + reason, whatEntry);
