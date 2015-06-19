@@ -38,7 +38,7 @@
     onmessage: function(evt) {
       var data = evt.data;
       addTxt('SVR2. Received:' + JSON.stringify(evt.data), whatEntry);
-      //this.sendMsg(evt.data);
+      this.sendMsg(evt.data);
     },
     sendMsg: function(aMsg) {
       var msg = aMsg || {

@@ -40,11 +40,11 @@
         ports.forEach(port => {
           addTxt('IAC connection success. Adding listener!', whatEntry);
           port.onmessage = function(evt) {
-            addTxt('Received:' +
+            addTxt('Received [' + where + ']:' +
                   (evt.data ? JSON.stringify(evt.data) : 'No data'), whatEntry);
           };
           msg.num = _count++;
-          addTxt('Sending:' + JSON.stringify(msg), whatEntry);
+          addTxt('Sending [' + where + ']:' + JSON.stringify(msg), whatEntry);
           port.postMessage(msg);
 
           (i--) && (_port = port);
