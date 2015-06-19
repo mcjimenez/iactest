@@ -16,12 +16,15 @@
   };
 
   var _eventsEntries = document.getElementById('eventsEntries');
-  var _btoPing = document.getElementById('ping');
+  var _btoPingSvr1 = document.getElementById('pingSvr1');
+  var _btoPingSvr2 = document.getElementById('pingSvr2');
 
   var whatEntry = _eventsEntries;
 
-  var _count = 0;
-  var _port = null;
+  var _countSvr1 = 0;
+  var _countSvr2 = 0;
+  var _portSrv1 = null;
+  var _portSrv2 = null;
 
   var msg = {
     txt: 'CLIENT MSG'
@@ -43,11 +46,11 @@
             addTxt('Received [' + where + ']:' +
                   (evt.data ? JSON.stringify(evt.data) : 'No data'), whatEntry);
           };
-          msg.num = _count++;
+          msg.num = (where === WHERE_SVR1 ? _countSvr1++ : _countSvr2++) ;
           addTxt('Sending [' + where + ']:' + JSON.stringify(msg), whatEntry);
           port.postMessage(msg);
 
-          (i--) && (_port = port);
+          (i--) && (where === WHERE_SVR1 ? _portSrv1 = port : _portSrv2 = port);
         });
       }, function onConnRejected(reason) {
         addTxt('Cannot connect:' + reason, whatEntry);
@@ -66,11 +69,16 @@
       console.log('Connecting ' + WHERE_SVR2);
       connect(app, WHERE_SVR2, RULES_SVR2);
 
-      _btoPing.addEventListener('click', function send() {
-        msg.num = _count++;
-        addTxt('Sending:' + JSON.stringify(msg), whatEntry);
-        _port.postMessage(msg);
-      });
+      function send(count, port, svr, evt) {
+        msg.num = count++;
+        addTxt('Sending [' + svr + ']:' + JSON.stringify(msg), whatEntry);
+        port.postMessage(msg);
+      }
+
+      _btoPingSvr1.addEventListener('click',
+                       send.bind(undefined, _countSvr1, _portSrv1, WHERE_SVR1));
+      _btoPingSvr2.addEventListener('click',
+                       send.bind(undefined, _countSvr2, _portSrv2, WHERE_SVR2));
     };
   });
 
