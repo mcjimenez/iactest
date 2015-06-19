@@ -21,8 +21,8 @@
 
   var whatEntry = _eventsEntries;
 
-  var _countSvr1 = 0;
-  var _countSvr2 = 0;
+  var _countSvr1 = 1;
+  var _countSvr2 = 1;
   var _portSrv1 = null;
   var _portSrv2 = null;
 
@@ -37,62 +37,65 @@
   }
 
   function connect(app, where, rules) {
-    if (app.connect) {
-      app.connect(where, rules).then(function onConnAccepted(ports) {
-        var i = 1;
-        ports.forEach(port => {
-          addTxt('IAC connection success. Adding listener!', whatEntry);
-          port.onmessage = function(evt) {
-            addTxt('Received [' + where + ']:' +
-                  (evt.data ? JSON.stringify(evt.data) : 'No data'), whatEntry);
-          };
-          //msg.num = (where === WHERE_SVR1 ? _countSvr1++ : _countSvr2++) ;
-          //addTxt('Sending [' + where + ']:' + JSON.stringify(msg), whatEntry);
-          //port.postMessage(msg);
+    return new Promise((resolve, reject) => {
+      if (app.connect) {
+        app.connect(where, rules).then(function onConnAccepted(ports) {
+          var i = 1;
+          var tmpPort;
+          ports.forEach(port => {
+            addTxt('IAC connection success. Adding listener!', whatEntry);
+            port.onmessage = function(evt) {
+              addTxt('Received [' + where + ']:' +
+                       (evt.data ? JSON.stringify(evt.data) : 'No data'),
+                     whatEntry);
+            };
+            msg.num = 0;
+            addTxt('Sending [' + where + ']:' + JSON.stringify(msg), whatEntry);
+            port.postMessage(msg);
 
-          console.log('CJC where:' + where);
-          if (where === WHERE_SVR1) {
-            console.log('CJC CONFIGURAR SVR1 ' + i);
-            (i--) && (_portSrv1 = port);
-            msg.num = _countSvr1++;
-          } else {
-            console.log('CJC CONFIGURAR SVR2 ' + i);
-            (i--) && (_portSrv2 = port);
-            msg.num = _countSvr2++;
-          }
-
-          addTxt('Sending [' + where + ']:' + JSON.stringify(msg), whatEntry);
-          port.postMessage(msg);
-
-          //(i--) && (where === WHERE_SVR1 ? _portSrv1 = port : _portSrv2 = port);
+            (i--) && (tmpPort = port);
+          });
+          resolve(tmpPort);
+        }, function onConnRejected(reason) {
+          //addTxt('Cannot connect:' + reason, whatEntry);
+          reject('Cannot connect:' + reason);
         });
-      }, function onConnRejected(reason) {
-        addTxt('Cannot connect:' + reason, whatEntry);
-      });
-    } else {
-      addTxt('Error: We don\'t have app.connect');
-    };
+      } else {
+        //addTxt('Error: We don\'t have app.connect', whatEntry);
+        reject('Error: We don\'t have app.connect');
+      };
+    });
   }
 
   window.addEventListener('load', function() {
     navigator.mozApps.getSelf().onsuccess = function(evt) {
       var app = evt.target.result;
 
-      console.log('Connecting ' + WHERE_SVR1);
-      connect(app, WHERE_SVR1, RULES_SVR1);
-      console.log('Connecting ' + WHERE_SVR2);
-      connect(app, WHERE_SVR2, RULES_SVR2);
-
-      function send(count, port, svr, evt) {
-        msg.num = count++;
-        addTxt('Sending [' + svr + ']:' + JSON.stringify(msg), whatEntry);
-        port.postMessage(msg);
+      function send(aCount, aPort, aSvr) {
+        msg.num = aCount;
+        addTxt('Sending [' + aSvr + ']:' + JSON.stringify(msg), whatEntry);
+        aPort.postMessage(msg);
       }
 
-      _btoPingSvr1.addEventListener('click',
-                       send.bind(undefined, _countSvr1, _portSrv1, WHERE_SVR1));
-      _btoPingSvr2.addEventListener('click',
-                       send.bind(undefined, _countSvr2, _portSrv2, WHERE_SVR2));
+      console.log('Connecting ' + WHERE_SVR1);
+      connect(app, WHERE_SVR1, RULES_SVR1).then(port => {
+        _btoPingSvr1.addEventListener('click', function(evt) {
+console.log(WHERE_SVR1 + (port?' tiene port':'no port'));
+          send(_countSvr1++, port, WHERE_SVR1);
+        });
+      }).catch(error => {
+        addTxt(error, whatEntry);
+      });
+
+      console.log('Connecting ' + WHERE_SVR2);
+      connect(app, WHERE_SVR2, RULES_SVR2).then(port => {
+        _btoPingSvr2.addEventListener('click', function(evt) {
+console.log(WHERE_SVR2 + (port?' tiene port':'no port'));
+          send(_countSvr2++, port, WHERE_SVR2);
+        });
+      }).catch(error => {
+        addTxt(error, whatEntry);
+      });
     };
   });
 
